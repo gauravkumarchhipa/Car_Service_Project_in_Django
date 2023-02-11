@@ -1,0 +1,131 @@
+{% extends 'admin/adminbase.html' %}
+<!-- {% block title %}CarService{% endblock title %} -->
+{% block body %}
+<style>
+  form {
+    margin: 45px;
+  }
+</style>
+<div class="content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card ">
+        <div class="card-header ">
+          <h4 class="text-center alert alert-info">Mechanic Registration</h4>
+        </div>
+        <form action="" method="post">
+          {% csrf_token %}
+          <!-- <input type="text" hidden value="{{Request.userId.userId.id}}" name="uid">
+          <input type="text" hidden value="{{Request.id}}" name="service_id"> -->
+
+          <div class="row">
+            <input type="text" hidden name="service_id" value={{Request.id}}>
+            <div class="col-md-4 mb-3">
+              <b>Username</b>
+              <input type="text" name="username" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+              <b>First Name</b>
+              <input type="text" name="fname" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+              <b>Last Name</b>
+              <input type="text" name="lname" class="form-control" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-4 mb-3">
+              <b>Email</b>
+              <input type="email" name="eml" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+              <b>Password</b>
+              <input type="password" name="pass" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+              <b>confirm Password</b>
+              <input type="password" name="cnpass" id="typePasswordX" class="form-control" />
+            </div>
+
+          </div>
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <b>Birthdate</b>
+              <input type="date" name="mdob" class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+              <b>Gender :</b><br><input type="radio" name="fm" value="male" />Male
+              <input type="radio" name="fm" value="female" />Female
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <b>City</b>
+              <select name="city" id="city" class="form-control">
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Gadhinager">Gadhinager</option>
+                <option value="Rajkot">Rajkot</option>
+              </select>
+
+            </div>
+            <div class="col-md-6 mb-3">
+              <b>Area</b>
+              <select name="area" id="area" class="form-control">
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-4 mb-3">
+              <b>skills</b>
+              <input type="text" name="skill" class="form-control" />
+
+            </div>
+            <div class="col-md-4 mb-3">
+              <b>Phone</b>
+              <input type="number" name="mno" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+              <b>Salary</b>
+              <input type="text" name="salary" class="form-control" />
+            </div>
+          </div>
+
+          <div class="mt-1 pt-1">
+            <input class="btn btn-dark btn-lg btn-block" type="submit" value="Submit" />
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+<script>
+  $(document).ready(function () {
+    $("#city").change(function () {
+      $(this).find("option:selected").each(function () {
+        var optionValue = $(this).attr("value");
+        if (optionValue == 'Ahmedabad') {
+          $('#area').html("<option value='vastral'>vastral</option><option value = 'Nikol' > Nikol</option><option value='Maninager'>Maninager</option>");
+
+        } else if (optionValue == 'Gadhinager') {
+          $('#area').html("<option value='vastrapur'>vastrapur</option><option value = 'Narol' >Narol</option><option value='Khokhra'>Khokhra</option>");
+
+        } else if (optionValue == 'Rajkot') {
+          $('#area').html("<option value='Bapunager'>Bapunager</option><option value = 'SG Highway' >SG Highway</option><option value='CG Road'>CG Road</option>");
+        }
+        else {
+          $('#demo').val();
+        }
+      });
+    }).change();
+  });
+
+</script>
+
+{% endblock body %}

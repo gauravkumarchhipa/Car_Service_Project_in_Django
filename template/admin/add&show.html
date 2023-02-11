@@ -1,0 +1,218 @@
+{% extends 'admin/adminbase.html' %}
+<!-- {% block title %}CarService{% endblock title %} -->
+{% block body %}
+
+<style>
+  form {
+    margin: 45px;
+  }
+</style>
+
+<div class="content">
+  <div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="nc-icon nc-globe text-warning"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+
+              <div class="numbers">
+                <a href="{% url 'panding_request' %}">
+                  <p class="card-category">Request Pending</p>
+                </a>
+
+
+              </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-refresh"></i>
+            Update Now
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="nc-icon nc-money-coins text-success"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Payment</p>
+
+                <p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-calendar-o"></i>
+            Last day
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="nc-icon nc-vector text-danger"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <a href="{% url 'all_reqshow_admin' %}">
+                  <p class="card-category">Request</p>
+                </a>
+                <!-- <p class="card-title">23
+                <p> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-clock-o"></i>
+            In the last hour
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="nc-icon nc-favourite-28 text-primary"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Payment</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-refresh"></i>
+            Update now
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card ">
+        <div class="card-header ">
+
+          <h4 class="text-center alert alert-info">Add New Services</h4>
+        </div>
+        <form method="post">
+          {% csrf_token %}
+          <b>ser_name:</b><input type="text" name="ser_name" class="form-control"><br>
+          <b>ser_charge:</b><input type="text" name="ser_charge" class="form-control"><br>
+          <b>ser_desc:</b><input type="textarea" name="ser_desc" class="form-control"><br>
+          <div class="custom-control custom-switch">
+            <input type="checkbox" name="chk_btn" value="True" class="custom-control-input" id="customSwitches" Checked>
+            <label class="custom-control-label" for="customSwitches">Service Active</label>
+          </div>
+          <input type="submit" class="btn btn-success" value="Add">
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="card ">
+        <div class="card-header ">
+
+          <div class="col-sm-12">
+            <h4 class="text-center alert alert-info">Show Services information</h4>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">No</th>
+                  <!-- <th scope="col">Id</th> -->
+                  <th scope="col">Service Name</th>
+                  <th scope="col">Service Charge</th>
+                  <th scope="col">Service_Description</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if service %}
+                {% for i in service %}
+                <tr>
+                  <th scope="row">{{forloop.counter}}</th>
+                  <!-- <th scope="row">{{i.id}}</th> -->
+                  <th scope="row">{{i.service_name}}</th>
+                  <td scope="row">{{i.service_charge}}</td>
+                  <td scope="row">{{i.service_desc}}</td>
+                  <td>
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" name="chk_btn" value="True" class="custom-control-input"
+                        id="customSwitches" {% if i.active is True %}checked{% endif %}>
+                      <label class="custom-control-label" for="customSwitches">Service Active</label>
+                    </div>
+                  </td>
+                  <td scope="row">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" name="chk_btn" value="{{i.active}}" class="custom-control-input"
+                        id="customSwitches">
+
+                    </div>
+                  </td>
+                  <td scope="row">
+                    <a href="{% url 'updatedata' i.id %}" class="btn btn-warning btn-sm">Edit</a>
+                  </td>
+                  <td scope="row">
+                    <form action="{% url 'deletedata' i.id %}" method="post" class="d-inline">
+                      {% csrf_token %}
+                      {% if i.id == 2 or i.id == 3 or i.id == 5 %}
+
+                      {% else %}
+                      <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                      {% endif %}
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <h4 class="text-center alert alert-warning">No Records</h4>
+                {% endif %}
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

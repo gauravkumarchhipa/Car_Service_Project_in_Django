@@ -1,0 +1,252 @@
+{% extends 'users/base.html' %}
+<!-- {% block title %}CarService{% endblock title %} -->
+
+{% block body %}
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(72, 74, 242, 0.62);
+        margin-bottom: 28px;
+        margin-top: 30px;
+        margin-left: 46px;
+        margin-right: 21px;
+        border-radius: 36px;
+        width: 73%;
+    }
+
+    #datatable {
+        width: 92%;
+    }
+
+    body {
+        background-image: linear-gradient(#3169d1, #4ffa47d1);
+    }
+
+    .card-body {
+        padding: 3.25rem;
+    }
+
+    /* ###### incriment decrement btn ########## */
+    .inc_dec {
+        width: 300px;
+        margin: 0 auto;
+        text-align: center;
+        padding-top: 50px;
+    }
+
+    .value-button {
+        display: inline-block;
+        border: 1px solid #ddd;
+        margin: 0px;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        vertical-align: middle;
+        padding: 11px 0;
+        background: #fff;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .value-button:hover {
+        cursor: pointer;
+    }
+
+    .inc_dec #decrease {
+        margin-right: -4px;
+        border-radius: 8px 0 0 8px;
+    }
+
+    .inc_dec #increase {
+        margin-left: -4px;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .inc_dec #input-wrap {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    input#number {
+        text-align: center;
+        border: none;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        margin: 0px;
+        width: 150px;
+        height: 40px;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* < !--##### close ###--> */
+</style>
+
+<h1></h1>
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-body ">
+                <div class="row">
+                    <!-- <div class="col-5 col-md-4"> -->
+
+                    <!-- </div> -->
+                    <div class="col-11 col-md-11 text-center">
+                        <h3>
+                            <a href="{% url 'carservices' %}">
+                                <i class="fa fa-external-link fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;
+                                <b>Make Request</b>
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-body ">
+                <div class="row">
+                    <!-- <div class="col-5 col-md-4"> -->
+
+                    <!-- </div> -->
+                    <div class="col-11 col-md-11 text-center">
+                        <h3>
+                            <a href="{% url 'request_status' user.id %}">
+                                <i class="fa fa-hourglass-end fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;
+                                <b> Request Status</b>
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-body ">
+                <div class="row">
+                    <!-- <div class="col-5 col-md-4"> -->
+
+                    <!-- </div> -->
+                    <div class="col-11 col-md-11 text-center">
+
+                        <h3>
+                            <a href="">
+                                <i class="fa fa-credit-card-alt fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;
+                                <b>Payment</b>
+                            </a>
+                        </h3>
+                        </b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="card" id="datatable">
+    <!-- <div class="card-header">
+        <b>Car Service Request</b>
+    </div> -->
+    <div class="card-body">
+        <table id="myTable" class="table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Service</th>
+                    <th>Mechanic Name</th>
+                    <th>Mechanic Number</th>
+                    <th>Mechanic Email</th>
+                    <th>Charge</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if sreq %}
+                {% for i in sreq %}
+                <tr>
+                    <td scope="row">{{forloop.counter}}</td>
+                    <td scope="row">{{i.Service.service_name}}</td>
+                    {%if i.Mechanic.userId.first_name %}<td scope="row">{{i.Mechanic.userId.first_name}}</td> {%endif %}
+                    <td scope="row">{{i.Mechanic.mobile}}</td>
+                    <td scope="row">{{i.Mechanic.userId.email}}</td>
+                    <td scope="row">
+                        <!-- {% if member != False %} -->
+                        {% if i.Fuel %}
+                        {% if i.Fuel == 'Petrol' or i.Fuel == 'Diesel' %}
+                        <p id="c">{{i.charge}}</p>
+                        {% else %}
+                        <p id="c">{{i.Service.service_charge}}</p>
+                        {% endif %}
+                        {% endif %}
+
+                        {% if i.pd_service != "['']" %}
+                        <p id="c">{{i.charge}}</p>
+                        {% endif %}
+
+                        {% if i.Service_id == 2 %}
+                        <p id="c">{{i.charge}}</p>
+                        {% endif %}
+
+                        <!-- {% else %}
+                        {% if i.Fuel %}
+                        {% if i.Fuel == 'Petrol' or i.Fuel == 'Diesel' %}
+                        <p id="c">{{i.charge|add:i.Service.service_charge}}</p>
+                        {% else %}
+                        <p id="c">{{i.Service.service_charge}}</p>
+                        {% endif %}
+                        {% endif %}
+
+                        {% if i.pd_service != "['']" %}
+                        <p id="c">{{i.charge|add:i.Service.service_charge}}</p>
+                        {% endif %}
+
+                        {% if i.Service_id == 2 %}
+                        <p id="c">{{i.charge}}</p>
+                        {% endif %}
+                        {% endif %} -->
+
+
+                    </td>
+                    <td scope="row">{{i.Date}}</td>
+
+                    {% if i.Status == 1 %}
+                    <td scope="row">Pending</td>
+                    {% elif i.Status == 2 %}
+                    <td scope="row">Aproov</td>
+                    {% elif i.Status == 3 %}
+                    <td>
+                        <a href="{% url 'makepayment' i.id %}">View</a>
+                    </td>
+                    {% else %}
+                    <td scope="row">-</td>
+                    {% endif %}
+
+
+                    {% endfor %}
+                    {% else %}
+                    <!-- <h4 class="text-center alert alert-warning">No Records</h4> -->
+                    {% endif %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" defer></script>
+
+
+
+{% endblock body %}

@@ -1,0 +1,78 @@
+{% extends 'admin/adminbase.html' %}
+<!-- {% block title %}CarService{% endblock title %} -->
+{% block body %}
+<style>
+    form {
+        margin: 45px;
+    }
+</style>
+<div class="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card ">
+                <div class="card-header ">
+                    <h4 class="text-center alert alert-info">Request Details</h4>
+                </div>
+                <form action="" method="post">
+                    <input type="text" hidden value="{{Request.userId.userId.id}}" name="uid">
+                    <input type="text" hidden value="{{Request.id}}" name="service_id">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <b>Car company:</b><input type="text" value={{Request.car_company}} readonly name="cname"
+                                class="form-control"><br>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <b>Car_Model:</b><input type="text" value={{Request.car_model}} readonly name="cmodel"
+                                class="form-control"><br>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <b>Car Number:</b><input type="text" value={{Request.car_number}} readonly name="cmodel"
+                                class="form-control"><br>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <b>Address</b><input value={{Request.Address}} readonly class="form-control"><br>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <b>Service</b><input value={{Request.Service.service_name}} readonly name=""
+                                class="form-control"><br>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <b>City</b><input type="text" value={{Request.city}} readonly name="city"
+                                class="form-control"><br>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <b>Area</b><input type="text" value={{Request.area}} readonly name="area"
+                                class="form-control"><br>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <b>Mechanic Available</b>
+                            {% if Mechanic_data %}
+                            <select id="service" name="Mechanic_assign" class="form-control">
+
+                                {% for i in Mechanic_data %}
+                                <option value="{{i.userId.id}}">{{i.userId.first_name}}</option>
+                                {% endfor %}
+                            </select>
+                            {% else %}
+                            <h2 class="form-control">No Mechanic Available</2>
+                                {% endif %}
+
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Assign">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock body %}

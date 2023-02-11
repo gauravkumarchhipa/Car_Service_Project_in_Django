@@ -1,0 +1,65 @@
+
+{% extends 'admin/adminbase.html' %}
+<!-- {% block title %}CarService{% endblock title %} -->
+{% block body %}
+<style>
+    form {
+        margin: 45px;
+    }
+</style>
+<!-- <div class="content">
+<div class="row">
+    <div class="col-sm-8"> 
+        <div class="card "></div>  
+        <div class="card-header ">
+            <h4 class="text-center alert alert-info">Update Mechanic</h4>
+        </div>
+   <form method="post">
+       {% csrf_token %}
+           <b>UserName:</b><input type="text" value="{{s1.userId.username}}" name="uname" class="form-control"><br>
+           <b>FirstName:</b><input type="text" value="{{s1.userId.first_name}}" name="fname" class="form-control"><br>
+           <b>LastName:</b><input type="text" value="{{s1.userId.last_name}}" name="lname" class="form-control"><br>
+           <b>Email:</b><input type="email" value="{{s1.userId.email}}" name="email" class="form-control"><br>
+           <b>Mobile:</b><input type="text" value="{{s1.mobile}}" name="mno" class="form-control"><br>
+           
+           <b>skill:</b><input type="text" value="{{s1.skill}}" name="skill" class="form-control"><br>
+           <input type="submit" class="btn btn-success" value="Update">
+           <a href="{% url 'add_show' %}" class="btn btn-success">Back </a>
+           <div class="custom-control custom-switch ">
+            <input type="checkbox" class="custom-control-input " id="switch{{s1.id}}" name="status" {% if s1.status == True %}checked{% endif %}>
+            <label class="custom-control-label" for="switch{{s1.id}}">Active/Deactive</label>
+          </div>
+       </form>
+   </div>
+   </div>
+   </div> -->
+   <div class="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card ">
+                <div class="card-header ">
+                    <h4 class="text-center alert alert-info">Update Mechanic</h4>
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                        <b>UserName:</b><input type="text" value="{{s1.userId.username}}" name="uname" class="form-control"><br>
+                        <b>FirstName:</b><input type="text" value="{{s1.userId.first_name}}" name="fname" class="form-control"><br>
+                        <b>LastName:</b><input type="text" value="{{s1.userId.last_name}}" name="lname" class="form-control"><br>
+                        <b>Email:</b><input type="email" value="{{s1.userId.email}}" name="email" class="form-control"><br>
+                        <b>Mobile:</b><input type="text" value="{{s1.mobile}}" name="mno" class="form-control"><br>
+                        
+                        <b>skill:</b><input type="text" value="{{s1.skill}}" name="skill" class="form-control"><br>
+                        <input type="submit" class="btn btn-success" value="Update">
+                        <a href="{% url 'add_show' %}" class="btn btn-success">Back </a>
+                        <div class="custom-control custom-switch ">
+                         <input type="checkbox" class="custom-control-input " id="switch{{s1.id}}" name="status" {% if s1.status == True %}checked{% endif %}>
+                         <label class="custom-control-label" for="switch{{s1.id}}">Active/Deactive</label>
+                       </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+
+

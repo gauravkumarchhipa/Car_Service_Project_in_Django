@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select The Multiple Services</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function()
+        {
+            $('.checkvalues').click(function()
+            {
+                var txt="";
+                $('.checkvalues:checked').each(function()
+                {
+                    txt+=$(this).val()+","
+                });
+                txt=txt.substring(0,txt.length-1);
+                $('#txtvalues').val(txt);
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- <form method="post">
+        {% csrf_token %}
+        <input type="text" name="service_name">
+        <input type="submit" value="insert" name="btn1" id="btn1"/>
+
+    </form> -->
+    <center>
+        <hr>
+        <form method="POST">
+        {% csrf_token %}
+        <input type="text" hidden name="uid" value="{{user.id}}">
+        Services:<br>
+        <input type="checkbox" value="True" name="fser" class="checkvalues">Fuel-Service<br>
+        Fuel charge :<input type="text" name="f_charge"><br>
+        Fuel des :<textarea></textarea name="f_desc"><br> <br>
+
+        <input type="checkbox" value="True" name="pser"class="checkvalues">Picup&Drop-Service<br>
+        P & d charge :<input type="text" name="p_charge"><br>
+        P & d des :<textarea></textarea name="p_desc"><br><br>
+               
+        <input type="checkbox" value="True" name="cser"class="checkvalues">Car-Service<br>
+        c_service charge :<input type="text" name="c_charge"><br>
+        c_service des :<textarea></textarea name="c_desc">
+        <hr/>
+        <!-- <input type="text" name="service_name" id="txtvalues"/> -->
+        <input type="submit" value="insert" id="btn1"/>
+    </form>
+    </center>
+    
+</body>
+</html>

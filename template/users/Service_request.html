@@ -1,0 +1,461 @@
+{% extends 'users/base.html' %}
+<!-- {% block title %}CarService{% endblock title %} -->
+
+{% block body %}
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $("#service").change(function () {
+            $(this).find("option:selected").each(function () {
+                var optionValue = $(this).attr("value");
+                if (optionValue == 3) {
+                    $("#pd").hide();
+                    $("#fuel").show();
+                    // $("#carservice").hide();
+                    $("#cars").hide();
+                    $("#PD").hide();
+                    $("#Fuel").show();
+                } else if (optionValue == 5) {
+                    $("#pd").show();
+                    $("#fuel").hide();
+
+                    $("#cars").hide();
+                    $("#PD").show();
+                    $("#Fuel").hide();
+                    // $("#carservice").hide();
+
+                } else if (optionValue == 2) {
+                    $("#pd").hide();
+                    $("#fuel").hide();
+
+                    $("#cars").show();
+                    $("#PD").hide();
+                    $("#Fuel").hide();
+                    // $("#carservice").show();
+
+                }
+                else {
+                    $("#cars").show();
+                    $("#PD").hide();
+                    $("#Fuel").hide();
+
+                    $("#pd").hide();
+                    // $("#carservice").hide();
+                    $("#fuel").hide();
+                }
+            });
+        }).change();
+    });
+
+
+    // < !--increment decrement-- >
+    function increaseValue() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById('number').value = value;
+    }
+
+    function decreaseValue() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value < 1 ? value = 1 : '';
+        value--;
+        document.getElementById('number').value = value;
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $('.checkvalues').click(function () {
+            var checkvalues = $('.checkvalues').val();
+            var txt = "";
+            var charge = "";
+            $('.checkvalues:checked').each(function () {
+
+                // if (checkvalues == 'washing') {
+                //     charge = + 100;
+                // }
+                // else if (checkvalues == 'engine_oil') {
+                //     charge = 200;
+                // }
+
+                txt += $(this).val() + ","
+            });
+            // $('#charge').val(charge);
+            txt = txt.substring(0, txt.length - 1);
+            $('#txtvalues').val(txt);
+        });
+    });
+</script>
+
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(72, 74, 242, 0.62);
+        margin-bottom: 28px;
+        margin-top: 30px;
+        margin-left: 46px;
+        margin-right: 21px;
+        border-radius: 36px
+    }
+
+
+
+    body {
+        background-image: linear-gradient(#3169d1, #4ffa47d1);
+    }
+
+    .card-body {
+        padding: 3.25rem;
+    }
+
+    /* ###### incriment decrement btn ########## */
+    .inc_dec {
+        width: 300px;
+        margin: 0 auto;
+        text-align: center;
+        padding-top: 50px;
+    }
+
+    .value-button {
+        display: inline-block;
+        border: 1px solid #ddd;
+        margin: 0px;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        vertical-align: middle;
+        padding: 11px 0;
+        background: #fff;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .value-button:hover {
+        cursor: pointer;
+    }
+
+    .inc_dec #decrease {
+        margin-right: -4px;
+        border-radius: 8px 0 0 8px;
+    }
+
+    .inc_dec #increase {
+        margin-left: -4px;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .inc_dec #input-wrap {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    input#number {
+        text-align: center;
+        border: none;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        margin: 0px;
+        width: 150px;
+        height: 40px;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* < !--##### close ###--> */
+</style>
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-body ">
+                <div class="row">
+                    <!-- <div class="col-5 col-md-4"> -->
+
+                    <!-- </div> -->
+                    <div class="col-11 col-md-11 text-center">
+                        <h3>
+                            <a href="{% url 'carservices' %}">
+                                <i class="fa fa-external-link fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;
+                                <b>Make Request</b>
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-body ">
+                <div class="row">
+                    <!-- <div class="col-5 col-md-4"> -->
+
+                    <!-- </div> -->
+                    <div class="col-11 col-md-11 text-center">
+                        <h3>
+                            <a href="{% url 'request_status' user.id %}">
+                                <i class="fa fa-hourglass-end fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;
+                                <b> Request Status</b>
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-body ">
+                <div class="row">
+                    <!-- <div class="col-5 col-md-4"> -->
+
+                    <!-- </div> -->
+                    <div class="col-11 col-md-11 text-center">
+
+                        <h3>
+                            <a href="{% url 'Payment_detail' user.id %}">
+                                <i class="fa fa-credit-card-alt fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;
+                                <b>Payment</b>
+                            </a>
+                        </h3>
+                        </b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-lg-9 col-md-1 col-sm-1">
+        <div class="card" id="requestform">
+            <div class="card-header">
+                <b>Car Service Request</b>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="text" hidden name="uid" value="{{user.id}}">
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <b><label for="validationDefault01">Car Company</label></b>
+                            <input type="text" class="form-control" id="validationDefault01" name="ccompany" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <b><label for="validationDefault02">Car Model</label></b>
+                            <input type="text" class="form-control" id="validationDefault02" name="cmodel" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <b><label for="validationDefault02">Car Number</label></b>
+                            <input type="text" class="form-control" id="validationDefault02" name="cnumber" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <b><label for="validationDefault03">City</label></b>
+                            <!-- <input type="text" class="form-control" id="validationDefault03" name="city" required>  -->
+                            <select name="city" id="city" class="form-control form-control-lg">
+                                <option value="Ahmedabad">Ahmedabad</option>
+                                <option value="Gadhinager">Gadhinager</option>
+                                <option value="Rajkot">Rajkot</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <b><label for="validationDefault04">Area</Area></label></b>
+                            <select name="area" id="area" class="form-control form-control-lg">
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <b><label for="validationDefault02">Mobile Number</label></b>
+                            <input type="text" class="form-control" id="validationDefault02" name="mobile" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <b><label for="validationDefault02">Service</label></b>
+                            <select id="service" name="service" class="form-control">
+                                <option value="">Select</option>
+                                {% if service %}
+                                {% for i in service %}
+                                <option value="{{i.id}}">{{i.service_name}}</option>
+                                {% endfor %}
+                                {% else %}
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <b><label for="validationDefault02">Address</label></b>
+                            <textarea name="address" id="caddress" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row" id="fuel">
+                        <div class="col-md-4 mb-3">
+                            <b><label for="validationDefault02">Select Fuel</label></b>
+                            <select id="fuel_s" name="fuel_s" class="form-control">
+                                <option value="">Select</option>
+                                <option id="petrol" value="Petrol">Petrol</option>
+                                <option id="Diesel" value="Diseal">Diesel</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <b><label for="validationDefault02">Liter</label></b><br />
+                            <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-
+                            </div>
+                            &nbsp;&nbsp;
+                            <input type="number" name="Liter" id="number" value="0" />&nbsp;&nbsp;
+                            <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row" id="pd">
+                        <!-- <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">Pick and Drop Address</label>
+                    <textarea name="address" id="address" class="form-control"></textarea>
+                </div> -->
+
+                        <div class="col-md-4 mb-3">
+                            <b><label for="validationDefault02">Date</label></b>
+                            <input type="date" value="2020-01-01" name="date" id="date" class="form-control"></input>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <b><label for="validationDefault02">Time</label></b>
+                            <input type="time" name="time" id="time" class="form-control"></input>
+                        </div>
+
+                        <div class="col-md-12 mb-1">
+                            <b><label for="validationDefault02">Select Services</label></b><br />
+                            <input type="checkbox" name="washing" value="washing" class="checkvalues">&nbsp;&nbsp;<label
+                                for="validationDefault02">Washing</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="engine_oil" value="engine_oil"
+                                class="checkvalues">&nbsp;&nbsp;<label for="validationDefault02">engine
+                                oil</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="oil_filter" value="oil_filter.300"
+                                class="checkvalues">&nbsp;&nbsp;<label for="validationDefault02">oil
+                                filter</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="breakes" value="breakes" class="checkvalues">&nbsp;&nbsp;<label
+                                for="validationDefault02">Breakes</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="Battery" value="Battery" class="checkvalues">&nbsp;&nbsp;<label
+                                for="validationDefault02">Battery</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <!-- <input type="checkbox" name="lights" value="lights" class="checkvalues">&nbsp;&nbsp;<label
+                        for="validationDefault02">Lights</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="bodywork" value="bodywork" class="checkvalues">&nbsp;&nbsp;<label
+                        for="validationDefault02">Body-Work</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="tyre" value="tyre" class="checkvalues">&nbsp;&nbsp;<label
+                        for="validationDefault02">Tyre</label>&nbsp;&nbsp;&nbsp;&nbsp; -->
+
+                        </div>
+                    </div>
+
+                    <!-- <input type="text" name="" id="charge" /> -->
+                    <input type="text" hidden name="pd_service" id="txtvalues" />
+                    <!-- <div class="col-md-3 mb-3">
+                    <label for="validationDefault05">Problem Description</label>
+                    <textarea class="form-control" name="pdesc"></textarea>
+                </div> -->
+
+                    <button class="btn btn-primary" type="submit">Send Request <i class="fa fa-telegram"
+                            aria-hidden="true"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div id="cars">
+                    <center><i><img src="{% static 'User/images/thr.png'%}" alt="#" /></i></center><br>
+                    {% if service %}
+                    {% for i in service %}
+                    {% if i.id == 2 %}
+                    <h3>Car service</h3>
+                    <p><b>Service charge</b> : {{i.service_charge}}</p>
+                    {% endif %}
+                    {% endfor %}
+                    {% else %}
+                    {% endif %}
+                </div>
+
+                <div id="Fuel">
+                    <center><i><img src="{% static 'User/images/thr1.png'%}" alt="#" /></i></center><br>
+                    {% if service %}
+                    {% for i in service %}
+                    {% if i.id == 3 %}
+                    <h3>Fuel service</h3>
+                    <p><b>Service charge</b> : {{i.service_charge}}</p>
+                    <p><b>Petrol</b>: {{i.Petrol}}</p>
+                    <p><b>Diesel</b>: {{i.Diesel}}</p>
+                    {% endif %}
+                    {% endfor %}
+                    {% else %}
+                    {% endif %}
+                </div>
+
+                <div id="PD">
+                    <center><i><img src="{% static 'User/images/thr2.png'%}" alt="#" /></i></center><br>
+                    {% if service %}
+                    {% for i in service %}
+                    {% if i.id == 5 %}
+                    <h3>Pick & Drop service</h3>
+                    <p><b>Service charge</b> : {{i.service_charge}}</p>
+                    <p><b>washing</b>: 100</p>
+                    <p><b>engine_oil</b>: 200</p>
+                    <p><b>oil_filter</b>: 300</p>
+                    <p><b>breakes</b>: 200</p>
+                    <p><b>Battery</b>: 500</p>
+                    {% endif %}
+                    {% endfor %}
+                    {% else %}
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#city").change(function () {
+            $(this).find("option:selected").each(function () {
+                var optionValue = $(this).attr("value");
+                if (optionValue == 'Ahmedabad') {
+                    $('#area').html("<option value='vastral'>vastral</option><option value = 'Nikol' > Nikol</option><option value='Maninager'>Maninager</option>");
+
+                } else if (optionValue == 'Gadhinager') {
+                    $('#area').html("<option value='vastrapur'>vastrapur</option><option value = 'Narol' >Narol</option><option value='Khokhra'>Khokhra</option>");
+
+                } else if (optionValue == 'Rajkot') {
+                    $('#area').html("<option value='Bapunager'>Bapunager</option><option value = 'SG Highway' >SG Highway</option><option value='CG Road'>CG Road</option>");
+                }
+                else {
+                    $('#demo').val();
+                }
+            });
+        }).change();
+    });
+
+</script>
+
+
+{% endblock body %}

@@ -1,0 +1,65 @@
+{% extends 'mechanic/Mechbase.html' %}
+<!-- {% block title %}CarService{% endblock title %} -->
+{% block body %}
+
+<style>
+    form {
+        margin: 45px;
+    }
+</style>
+<div class="content">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header ">
+
+                    <div class="col-sm-12">
+                        <h4 class="text-center alert alert-info">Your Service Detail</h4>
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Service</th>
+                                    <th scope="col">User FirstName</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Mobile</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if payment %}
+                                {% for i in payment %}
+                                <tr>
+                                    <th scope="row">{{forloop.counter}}</th>
+                                    <th scope="row">{{i.Service.service_name}}</th>
+                                    <th scope="row">{{i.userId.userId.first_name}}</th>
+                                    <td scope="row">{{i.userId.userId.email}}</td>
+                                    <td scope="row">{{i.userId.mobile_no}}</td>
+                                    <!-- <td scope="row">{{i.mobile_no}}</td> -->
+
+                                    {% if i.Status == 3 %}
+                                    <td scope="row">Waiting for Payment</td>
+                                    {% elif i.Status == 4 %}
+                                    <td scope="row">Payment Success</td>
+                                    {% else %}
+                                    <td scope="row">-</td>
+                                    {% endif %}
+
+                                </tr>
+                                {% endfor %}
+                                {% else %}
+                                <h4 class="text-center alert alert-warning">No Recevie</h4>
+                                {% endif %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

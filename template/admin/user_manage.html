@@ -1,0 +1,89 @@
+{% extends 'admin/adminbase.html' %}
+<!-- {% block title %}CarService{% endblock title %} -->
+{% block body %}
+
+<style>
+    form {
+        margin: 45px;
+    }
+</style>
+<div class="content">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header ">
+
+                    <div class="col-sm-12">
+                        <h4 class="text-center alert alert-info">Users</h4>
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <!-- <th scope="col">Id</th> -->
+                                    <th scope="col">UserName</th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Mobile</th>
+                                    <th scope="col">Dob</th>
+                                    <!-- <th scope="col">Active/Deactive</th> -->
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if all_cust %}
+                                {% for i in all_cust %}
+                                <tr>
+                                    <th scope="row">{{forloop.counter}}</th>
+                                    <th scope="row">{{i.userId.username}}</th>
+                                    <th scope="row">{{i.userId.first_name}}</th>
+                                    <td scope="row">{{i.userId.last_name}}</td>
+                                    <td scope="row">{{i.userId.email}}</td>
+                                    <td scope="row">{{i.mobile_no}}</td>
+
+                                    <td scope="row">{{i.dob}}</td>
+                                    <!-- <td scope="row">{{i.service_desc}}</td> -->
+                                    <!-- <td>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" name="chk_btn" value="True"
+                                                class="custom-control-input" id="customSwitches">
+                                            <label class="custom-control-label" for="customSwitches">Service
+                                                Active</label>
+                                        </div>
+                                    </td>
+                                    <td scope="row">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" name="chk_btn" value="{{i.active}}"
+                                                class="custom-control-input" id="customSwitches">
+
+                                        </div>
+                                    </td> -->
+                                    <td scope="row">
+                                        <a href="{% url 'admin_usermanage' i.userId_id %}"
+                                            class="btn btn-warning btn-sm">Edit</a>
+                                    </td>
+                                    <td scope="row">
+                                        <form action="{% url 'admin_user_delete' i.userId_id %}" method="post"
+                                            class="d-inline">
+                                            {% csrf_token %}
+                                            <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                {% else %}
+                                <h4 class="text-center alert alert-warning">No Records</h4>
+                                {% endif %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

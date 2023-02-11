@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style media="screen">
+        .img-fluid {
+            max-width: 110%;
+            height: 90%;
+        }
+
+        .gradient-custom {
+            /* fallback for old browsers */
+            background: #6a11cb;
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+        }
+    </style>
+</head>
+
+<body>
+    <section class="vh-100" style="background-color: #1559b7;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-xl-10">
+                    <div class="card" style="border-radius: 1rem;">
+                        <div class="row g-0">
+                            <div class="col-md-6 col-lg-5 d-none d-md-block">
+                                <img src="{% static 'User/images/mec4.png'%}" alt="login form" class="img-fluid"
+                                    style="border-radius: 1rem 0 0 1rem;">
+                            </div>
+                            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                                <div class="card-body p-4 p-lg-5 text-black">
+                                    <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+                                    <form action="" method="POST">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-6 mb-2">
+
+                                                <div class="form-outline">
+                                                    <!--                    <input type="text" id="firstName" class="form-control form-control-lg" />-->
+                                                    <!--                    <label class="form-label" for="firstName">First Name</label>-->
+                                                    <input type="text" name="username"
+                                                        class="form-control form-control-lg" />
+                                                    <label class="form-label">Username</label>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+
+                                                <div class="form-outline">
+                                                    <input type="email" name="eml"
+                                                        class="form-control form-control-lg" />
+                                                    <label class="form-label">Email</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 mb-2 d-flex align-items-center">
+
+                                                <div class="form-outline">
+                                                    <input type="text" name="fname"
+                                                        class="form-control form-control-lg" />
+                                                    <label class="form-label">First Name</label>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+
+                                                <input type="text" name="lname" class="form-control form-control-lg" />
+                                                <label class="form-label">Last Name</label>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 mb-2 pb-2">
+
+                                                <div class="form-outline">
+                                                    <input type="password" name="pass"
+                                                        class="form-control form-control-lg" />
+                                                    <label class="form-label">Password</label>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6 mb-2 pb-2">
+
+                                                <div class="form-outline">
+                                                    <input type="password" name="cnpass" id="typePasswordX"
+                                                        class="form-control form-control-lg" />
+                                                    <label class="form-label" for="typePasswordX">confirm
+                                                        Password</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-2 pb-2">
+                                                <div class="form-outline">
+                                                    <input type="date" name="mdob"
+                                                        class="form-control form-control-lg" />
+                                                    <label class="form-label">Birthdate</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-2 pb-2">
+                                                <div class="form-outline">
+                                                    <input type="radio" name="fm" value="male" />Male
+                                                    <input type="radio" name="fm" value="female" />Female
+                                                    <br><br>
+                                                    <label class="form-label">Gender</label>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 mb-2 pb-2">
+                                                <div class="form-outline form-white mb-4">
+                                                    <input type="text" name="skill"
+                                                        class="form-control form-control-lg" />
+                                                    <label class="form-label">skills</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-2 pb-2">
+                                                <div class="form-outline">
+                                                    <input type="number" name="mno"
+                                                        class="form-control form-control-lg" />
+                                                    <label class="form-label" for="typePasswordX">Phone</label>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 mb-2 pb-2">
+                                                <div class="form-outline form-white mb-4">
+                                                    <select name="city" id="city" class="form-control form-control-lg">
+                                                        <option value="Ahmedabad">Ahmedabad</option>
+                                                        <option value="Gadhinager">Gadhinager</option>
+                                                        <option value="Rajkot">Rajkot</option>
+                                                    </select>
+                                                    <label class="form-label">City</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2 pb-2">
+                                                <select name="area" id="area" class="form-control form-control-lg">
+                                                </select>
+                                                <label class="form-label">Area</label>
+                                            </div>
+                                        </div>
+
+
+                                        <p class="mb-1" style="color: #393f81;">Already have account? <a
+                                                href="{% url 'login' %}" style="color: #393f81;">Login</a></p>
+
+                                        <div class="mt-1 pt-1">
+                                            <input class="btn btn-dark btn-lg btn-block" type="submit" value="Submit" />
+                                        </div>
+
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        $("#city").change(function () {
+            $(this).find("option:selected").each(function () {
+                var optionValue = $(this).attr("value");
+                if (optionValue == 'Ahmedabad') {
+                    $('#area').html("<option value='vastral'>vastral</option><option value = 'Nikol' > Nikol</option><option value='Maninager'>Maninager</option>");
+
+                } else if (optionValue == 'Gadhinager') {
+                    $('#area').html("<option value='vastrapur'>vastrapur</option><option value = 'Narol' >Narol</option><option value='Khokhra'>Khokhra</option>");
+
+                } else if (optionValue == 'Rajkot') {
+                    $('#area').html("<option value='Bapunager'>Bapunager</option><option value = 'SG Highway' >SG Highway</option><option value='CG Road'>CG Road</option>");
+                }
+                else {
+                    $('#demo').val();
+                }
+            });
+        }).change();
+    });
+
+</script>
+
+
+</html>

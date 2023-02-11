@@ -1,0 +1,156 @@
+{% extends 'mechanic/Mechbase.html' %}
+<!-- {% block title %}CarService{% endblock title %} -->
+{% block body %}
+<style>
+    form {
+        margin: 45px;
+        margin-top: 45px;
+        margin-bottom: 45px;
+        margin-bottom: 5px;
+        margin-top: 8px;
+
+    }
+</style>
+<div class="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card ">
+                <div class="card-header ">
+                    <h4 class="text-center alert alert-info">Request Details</h4>
+                </div>
+                <form action="{% url 'add_car_ser' %}" method="post">
+                    {% csrf_token %}
+                    <!-- <input type="text" hidden value="{{Request.userId.userId.id}}" name="uid">
+                    <input type="text" hidden value="{{Request.id}}" name="service_id"> -->
+
+                    <div class="row">
+                        <input type="text" hidden name="service_id" value={{Request.id}}>
+                        <div class="col-md-4 mb-3">
+                            <b>Car company:</b><input type="text" value={{Request.car_company}} readonly name="cname"
+                                class="form-control"><br>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <b>Car_Model:</b><input type="text" value={{Request.car_model}} readonly name="cmodel"
+                                class="form-control"><br>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <b>Car Number:</b><input type="text" value={{Request.car_number}} readonly name="cmodel"
+                                class="form-control"><br>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <b>Address</b><input type="text" name="Address" value={{Request.Address}} readonly
+                                class="form-control"><br>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <b>Service</b><input value={{Request.Service.service_name}} readonly name="service"
+                                class="form-control"><br>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <b>City</b><input type="text" value={{Request.city}} readonly name="city"
+                                class="form-control"><br>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <b>Area</b><input type="text" value={{Request.area}} readonly name="area"
+                                class="form-control"><br>
+                        </div>
+                    </div>
+
+                    {% if Request.Service_id == 3 %}
+                    <div class="form-row">
+                        {% if Request.Fuel == 'Petrol' %}
+                        <div class="col-md-6 mb-3">
+                            <b>Fuel</b><input type="text" value={{Request.Fuel}} readonly name="Fuel"
+                                class="form-control"><br>
+                        </div>
+                        {% else %}
+                        <div class="col-md-6 mb-3">
+                            <b>Fuel</b><input type="text" value={{Request.Fuel}} readonly name="Fuel"
+                                class="form-control"><br>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% elif Request.Service_id == 5 %}
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <b>Pick & drop Date</b><input type="date" value={{Request.pd_date|date:"Y-m-d"}} readonly
+                                name="pd_date" class="form-control"><br>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <b>Pick & drop Time</b><input type="time" value={{Request.pd_time}} readonly name="pd_time"
+                                class="form-control"><br>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <b>Pick & drop Services</b><input type="text" value="{{Request.pd_service}}" readonly
+                                name="pd_service" class="form-control"><br>
+                        </div>
+
+                    </div>
+                    {% elif Request.Service_id == 2 %}
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <input hidden value={{Request.userId}} name="userid">
+                            <input hidden value={{Request.id}} name="sid">
+                            <b>Add Service</b><input type="text" value="" id="as1" name="as" class="form-control"><br>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <b>Add charge</b><input type="text" value="" id="ac1" name="ac" class="form-control"><br>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <input type="submit" value="Add" name="add_car_service" class="btn btn-success"><br>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            {% if cser %}
+                            {% for i in cser %}
+                            <table class="table">
+                                <tr>
+                                    <td>{{i.service_name}}</td>
+                                    <td>{{i.service_charge}}</td>
+                                </tr>
+                            </table>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </form>
+
+
+
+                <form action="{% url 'bill_generat' %}" method="post">
+                    <input type="text" hidden value="{{Request.Mechanic_id}}" name="uid">
+                    <input type="text" hidden value="{{Request.id}}" name="service_id">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            {% if Request.Service_id == 2 %}
+                            <b>charge</b><input type="text" id="charge" value={{Request.charge|add:charge}} readonly
+                                name="service_charge" class="form-control"><br>
+                            {% else %}
+                            <b>charge</b><input type="text" value={{Request.charge|add:Request.Service.service_charge}}
+                                readonly name="service_charge" class="form-control"><br>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                    <!-- <input type="" class="btn btn-success" value=""> -->
+                    <input type="submit" name="bill" class="btn btn-success" value="Bill Generat">
+                    <a href="{% url 'mechanicpanel' %}" class="btn btn-success">Back </a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock body %}

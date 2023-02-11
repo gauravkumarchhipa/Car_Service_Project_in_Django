@@ -1,0 +1,301 @@
+{% extends 'users/base.html' %}
+<!-- {% block title %}CarService{% endblock title %} -->
+
+{% block body %}
+<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<style>
+    .invoice-title h2,
+    .invoice-title h3 {
+        display: inline-block;
+    }
+
+    .table>tbody>tr>.no-line {
+        border-top: none;
+    }
+
+    .table>thead>tr>.no-line {
+        border-bottom: none;
+    }
+
+    .table>tbody>tr>.thick-line {
+        border-top: 2px solid;
+    }
+
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(72, 74, 242, 0.62);
+        margin-bottom: 28px;
+        margin-top: 30px;
+        margin-left: 46px;
+        margin-right: 21px;
+        border-radius: 36px;
+        /* width: 73%; */
+    }
+
+    #datatable {
+        width: 92%;
+    }
+
+    body {
+        background-image: linear-gradient(#3169d1, #4ffa47d1);
+    }
+
+    .card-body {
+        padding: 3.25rem;
+    }
+
+    /* ###### incriment decrement btn ########## */
+    .inc_dec {
+        width: 300px;
+        margin: 0 auto;
+        text-align: center;
+        padding-top: 50px;
+    }
+
+    .value-button {
+        display: inline-block;
+        border: 1px solid #ddd;
+        margin: 0px;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        vertical-align: middle;
+        padding: 11px 0;
+        background: #fff;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .value-button:hover {
+        cursor: pointer;
+    }
+
+    .inc_dec #decrease {
+        margin-right: -4px;
+        border-radius: 8px 0 0 8px;
+    }
+
+    .inc_dec #increase {
+        margin-left: -4px;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .inc_dec #input-wrap {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    input#number {
+        text-align: center;
+        border: none;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        margin: 0px;
+        width: 150px;
+        height: 40px;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+</style>
+<div class="container">
+    <!-- <div class="row">
+        <div class="col-xs-12">
+            <div class="invoice-title">
+                <h2>Payment</h2>
+                <h3 class="pull-right">Order # 12345</h3>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-6">
+                    <address>
+                        <strong>s</strong><br>
+                        John Smith<br>
+                        1234 Main<br>
+                        Apt. 4B<br>
+                        Springfield, ST 54321
+                    </address>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <address>
+                        <strong>Shipped To:</strong><br>
+                        Jane Smith<br>
+                        1234 Main<br>
+                        Apt. 4B<br>
+                        Springfield, ST 54321
+                    </address>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <address>
+                        <strong>Payment Method:</strong><br>
+                        Visa ending **** 4242<br>
+                        jsmith@email.com
+                    </address>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <address>
+                        <strong>Order Date:</strong><br>
+                        March 7, 2014<br><br>
+                    </address>
+                </div>
+            </div>
+        </div> -->
+</div>
+
+<div class="row">
+    <div class="col-lg-12 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><strong>Make Payment</strong></h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <td><strong>Service</strong></td>
+                                                <td class="text-center"><strong>Price</strong></td>
+                                                <!-- <td class="text-center"><strong>Quantity</strong></td> -->
+                                                <td class="text-right"><strong>Totals</strong></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr>
+                                                <td>{{s1.Service.service_name}}</td>
+                                                <td class="text-center">
+                                                    {% if s1.Service_id == 2 %}
+                                                    {{s1.Service.service_charge}}
+
+                                                    {% else %}
+                                                    {{charge}}
+                                                    {% endif %}
+                                                </td>
+                                                <!-- <td class="text-center">1</td> -->
+                                                <td class="text-right">
+                                                    {% if s1.Service_id == 2 %}
+                                                    {{s1.Service.service_charge}}
+
+                                                    {% else %}
+                                                    {{charge}}
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+
+                                            <!-- {% if s1.Service_id == 5 %}
+                                            <tr>
+                                                <td>{{s1.pd_service}}</td>
+                                            </tr>
+                                            {% endif %} -->
+
+                                            {% if s1.Service_id == 2 %}
+                                            {% for i in added_service %}
+                                            <tr>
+                                                <td>{{i.service_name}}</td>
+                                                <td class="text-center">{{i.service_charge}}</td>
+                                                <!-- <td class="text-center">1</td> -->
+                                                <td class="text-right">{{i.service_charge}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                            {% endif %}
+                                            <!-- <tr>
+                                <td class="thick-line"></td>
+                                <td class="thick-line"></td>
+                                <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                <td class="thick-line text-right">$670.99</td>
+                            </tr> -->
+                                            <br>
+                                            <tr>
+                                                <!-- <td class="no-line"></td> -->
+                                                <td class="no-line"></td>
+                                                <td class="no-line text-center"><strong>Total</strong></td>
+                                                <td class="no-line text-right">{{charge}}</td>
+                                            </tr>
+                                            <br>
+                                            <br>
+                                            <tr>
+                                                <td>
+                                                    <form action="{% url 'makepayment' s1.id %}" id="myform"
+                                                        method="post">
+                                                        {% csrf_token %}
+                                                        <input hidden name="service_id" value="{{s1.id}}">
+                                                        <input hidden name="uid" value="{{s1.userId_id}}">
+                                                        <div id="paypal-button-container"></div>
+
+                                                        <!-- Include the PayPal JavaScript SDK -->
+                                                        <script
+                                                            src="https://www.paypal.com/sdk/js?client-id=AT_H7_tevlRXxq1ahQWgpGr4M-XLmGy4DWLSpKUv2EGPSLAJbwPPjzbYAG4ZXDo3NdkN94vMH-Ox2lNo&currency=USD"></script>
+
+                                                        <script>
+                                                            // Render the PayPal button into #paypal-button-container
+                                                            paypal.Buttons({
+
+                                                                // Set up the transaction
+                                                                createOrder: function (data, actions) {
+                                                                    return actions.order.create({
+                                                                        purchase_units: [{
+                                                                            amount: {
+                                                                                value: '{{charge}}'
+                                                                            }
+                                                                        }]
+                                                                    });
+                                                                },
+
+                                                                // Finalize the transaction
+                                                                onApprove: function (data, actions) {
+                                                                    return actions.order.capture().then(function (orderData) {
+                                                                        // Successful capture! For demo purposes:
+                                                                        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                                                                        var transaction = orderData.purchase_units[0].payments.captures[0];
+                                                                        alert('Transaction ' + transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+                                                                        document.getElementById('myform').submit();
+                                                                        // Replace the above to show a success message within this page, e.g.
+                                                                        // const element = document.getElementById('paypal-button-container');
+                                                                        // element.innerHTML = '';
+                                                                        // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                                                                        // Or go to another URL:  actions.redirect('thank_you.html');
+                                                                    });
+                                                                }
+
+
+                                                            }).render('#paypal-button-container');
+                                                        </script>
+                                                    </form>
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock body %}

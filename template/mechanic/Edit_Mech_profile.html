@@ -1,0 +1,68 @@
+{% extends 'mechanic/Mechbase.html' %}
+<!-- {% block title %}CarService{% endblock title %} -->
+{% block body %}
+<style>
+    form {
+        margin: 45px;
+    }
+</style>
+<div class="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card ">
+                <div class="card-header ">
+                    <h4 class="text-center alert alert-info">Profile</h4>
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <b>UserName:</b><input type="text" value="{{s1.userId.username}}" readonly name="username"
+                                class="form-control"><br>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <b>FirstName:</b><input type="text" value="{{s1.userId.first_name}}" name="fname"
+                                class="form-control"><br>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <b>LastName:</b><input type="text" value="{{s1.userId.last_name}}" name="lname"
+                                class="form-control"><br>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <b>Mobile:</b><input type="text" value="{{s1.mobile}}" name="mno" class="form-control"><br>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <b>Email:</b><input type="email" value="{{s1.userId.email}}" name="email"
+                                class="form-control"><br>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-12 mb-3">
+                            Dob:</b><input type="date" value={{s1.dob|date:"Y-m-d"}} name="dob" class="form-control">
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-12 mb-3">
+                            <b>skill:</b><input type="text" value="{{s1.skill}}" name="skill" class="form-control"><br>
+                        </div>
+
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock body %}

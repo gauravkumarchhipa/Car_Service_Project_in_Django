@@ -1,0 +1,44 @@
+{% extends 'admin/adminbase.html' %}
+<!-- {% block title %}CarService{% endblock title %} -->
+{% block body %}
+<style>
+    form {
+        margin: 45px;
+    }
+</style>
+<div class="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card ">
+                <div class="card-header ">
+                    <h4 class="text-center alert alert-info">Update Services</h4>
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    <b>ser_Id:</b><input type="number" value="{{s1.id}}" readonly name="ser_id"
+                        class="form-control"><br>
+                    <b>ser_name:</b><input type="text" value="{{s1.service_name}}" name="ser_name"
+                        class="form-control"><br>
+                    <b>ser_charge:</b><input type="text" value="{{s1.service_charge}}" name="ser_charge"
+                        class="form-control"><br>
+                    <b>ser_desc:</b><input type="textarea" value={{s1.service_desc}} name="ser_desc"
+                        class="form-control"><br>
+                    {% if s1.id == 3 %}
+                      <!-- <b>Petrol:</b><input type="text" value="{{s1.Petrol}}" name="petrol" class="form-control"><br>
+                       <b>Diesel:</b><input type="text" value="{{s1.Diesel}}" name="Diesel" class="form-control"><br> -->
+                    {% else %}
+                    {% endif %}
+                    <div class="custom-control custom-switch">
+                        <!-- <input type="checkbox" class="custom-control-input" id="switch{{s1.id}}" name="status" {% if s1.active is True %}checked{%endif%}> -->
+                        <input type="checkbox" name="status" class="custom-control-input" id="customSwitches" {% if s1.active is True %}checked{% endif %}>
+                        <label class="custom-control-label" for="customSwitches">Service Active</label>
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Update">
+                    <a href="{% url 'add_show' %}" class="btn btn-success">Back </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

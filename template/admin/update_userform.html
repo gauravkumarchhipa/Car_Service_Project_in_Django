@@ -1,0 +1,36 @@
+{% extends 'admin/adminbase.html' %}
+<!-- {% block title %}CarService{% endblock title %} -->
+{% block body %}
+<style>
+    form {
+        margin: 45px;
+    }
+</style>
+<div class="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card ">
+                <div class="card-header ">
+                    <h4 class="text-center alert alert-info">Update Users</h4>
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    <b>username:</b><input type="text" value="{{s1.userId.username}}" name="username"
+                        class="form-control"><br>
+                    <b>First Name:</b><input type="text" value="{{s1.userId.first_name}}" name="fname"
+                        class="form-control"><br>
+                    <b>Last Nmae:</b><input type="text" value="{{s1.userId.last_name}}" name="lname"
+                        class="form-control"><br>
+                    <b>Email</b><input type="text" value="{{s1.userId.email}}" name="email" class="form-control"><br>
+                    <b>Mobile Number</b><input type="text" value="{{s1.mobile_no}}" name="mobile"
+                        class="form-control"><br>
+                    <!-- <b>Dob</b><input type="date" value="{{s1.dob}}" name="dob" class="form-control"><br> -->
+                    <input type="submit" class="btn btn-success" value="Update">
+                    <a href="{% url 'user_manage' %}" class="btn btn-success">Back </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
