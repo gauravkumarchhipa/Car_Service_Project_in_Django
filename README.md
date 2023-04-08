@@ -1,4 +1,10 @@
 # Car_Service_Project_in_Django
+# Using Technology
+HTML, CSS, Python, Django
+# Installation
+python, django
+# compilation
+python manage.py startapp <appname>
 #Screenshort
 ![Screenshot (529)](https://user-images.githubusercontent.com/93989396/219710846-01ad555d-325d-459e-a3c1-d7bf60ed9c97.png)
 ![Screenshot (530)](https://user-images.githubusercontent.com/93989396/219710856-41eba74c-ab16-43a7-803e-d48358b58711.png)
